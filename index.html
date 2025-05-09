@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medisa</title>
+  <style>
+    body {
+      margin: 0;
+      background: #111;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      color: white;
+      font-family: sans-serif;
+    }
+
+    #slideshow {
+      width: 90%;
+      max-width: 400px;
+      height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 16px;
+    }
+
+    #slideshow img {
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+      transition: opacity 0.5s ease;
+    }
+
+    .buttons {
+      margin-top: 1rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    button {
+      padding: 0.7rem 1.2rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      background-color: #444;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div id="slideshow">
+    <img id="slide" src="./Pictures/image1.jpg" alt="Picture 1">
+  </div>
+  <div class="buttons">
+    <button onclick="prevSlide()">قبلی</button>
+    <button onclick="nextSlide()">بعدی</button>
+  </div>
+
+  <script>
+    const images = ['./Pictures/image1.jpg', './Pictures/image2.jpg', './Pictures/image3.jpg', './Pictures/image4.jpg', './Pictures/image5.jpg']; // اینجا آدرس عکس‌هاتو بذار
+    let current = 0;
+
+    function showSlide(index) {
+      const slide = document.getElementById('slide');
+      slide.style.opacity = 0;
+      setTimeout(() => {
+        slide.src = images[index];
+        slide.alt = `Picture ${index + 1}`;
+        slide.style.opacity = 1;
+      }, 200);
+    }
+
+    function nextSlide() {
+      current = (current + 1) % images.length;
+      showSlide(current);
+    }
+
+    function prevSlide() {
+      current = (current - 1 + images.length) % images.length;
+      showSlide(current);
+    }
+  </script>
+</body>
+</html>
